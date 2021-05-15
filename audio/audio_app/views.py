@@ -5,9 +5,11 @@ from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.parsers import JSONParser
 from .serializers import *
+from rest_framework.decorators import api_view
 
 # Create your views here.
 
+@api_view(('POST',))
 @csrf_exempt
 def create(request):
     if request.method == 'POST':
@@ -44,6 +46,8 @@ def create(request):
     return JsonResponse({'done':'success'})
 
 
+
+@api_view(('POST',))
 @csrf_exempt
 def delete(request, audioFileType, id):
     if request.method == 'POST':
@@ -76,6 +80,7 @@ def delete(request, audioFileType, id):
     return JsonResponse({'done':'success'})
     
 
+@api_view(('POST',))
 @csrf_exempt
 def update(request, audioFileType, id):
     if request.method == 'POST':
@@ -122,8 +127,7 @@ def update(request, audioFileType, id):
     return JsonResponse({'done':'success'})
 
 
-
-# ContactSerializer(query, many=True).data
+@api_view(('GET',))
 @csrf_exempt
 def listdetail(request, **kwargs):
     if request.method == 'GET':
